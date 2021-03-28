@@ -5,11 +5,22 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform goal = null;
+    private GameController gameController;
+    private NavMeshAgent agent;
 
     void Start()
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal.position;
+        gameController = FindObjectOfType<GameController>();
+        agent = GetComponent<NavMeshAgent>();
+
+        agent.destination = GameController.Finish;
+    }
+
+    private void Update()
+    {
+        if(agent.remainingDistance == 0)
+        {
+            Destroy(gameObject, 1);
+        }
     }
 }
