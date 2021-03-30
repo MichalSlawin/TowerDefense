@@ -5,21 +5,22 @@ using UnityEngine;
 public class Respawn : MonoBehaviour
 {
     [SerializeField] private GameObject enemyCubePrefab = null;
+    [SerializeField] private int enemiesNumber = 1;
+    [SerializeField] private float respawnTime = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
+        StartCoroutine(SpawnEnemy());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator SpawnEnemy()
     {
-        
-    }
-
-    private void SpawnEnemy()
-    {
-        Instantiate(enemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+        yield return new WaitForSeconds(respawnTime);
+        if(enemiesNumber > 0)
+        {
+            Instantiate(enemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+            enemiesNumber--;
+            StartCoroutine(SpawnEnemy());
+        }
     }
 }

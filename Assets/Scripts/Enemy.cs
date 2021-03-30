@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour
 {
     private GameController gameController;
     private NavMeshAgent agent;
+    
+    [SerializeField] private int health = 1;
+
+    public int Health { get => health; set => health = value; }
 
     void Start()
     {
@@ -18,9 +22,14 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if(agent.remainingDistance == 0)
+        if(agent.remainingDistance < 2)
         {
             Destroy(gameObject, 1);
+        }
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
