@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private int damage = 1;
-    private float speed = 10f;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private float speed = 10f;
     private Enemy target;
-
-    public int Damage { get => damage; set => damage = value; }
 
     void Start()
     {
@@ -32,7 +30,7 @@ public class Bullet : MonoBehaviour
         GameObject go = other.gameObject;
         if(go.CompareTag("Enemy"))
         {
-            go.GetComponent<Enemy>().Health -= Damage;
+            go.GetComponent<Enemy>().Health -= damage;
             Destroy(gameObject);
         }
     }

@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     private static Vector3 respawn;
     private static Vector3 finish;
     private static int playerHealth = 10;
+    private static TextMeshProUGUI hpText;
 
     public static Vector3 Respawn { get => respawn; set => respawn = value; }
     public static Vector3 Finish { get => finish; set => finish = value; }
@@ -17,6 +19,7 @@ public class GameController : MonoBehaviour
         set
         {
             playerHealth = value;
+            hpText.text = playerHealth.ToString();
         }
     }
 
@@ -24,5 +27,8 @@ public class GameController : MonoBehaviour
     {
         respawn = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>().position;
         finish = GameObject.FindGameObjectWithTag("Finish").GetComponent<Transform>().position;
+
+        hpText = GameObject.Find("HPText").GetComponent<TextMeshProUGUI>();
+        hpText.text = playerHealth.ToString();
     }
 }
