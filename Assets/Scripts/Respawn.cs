@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyCubePrefab = null;
-    [SerializeField] private int enemiesNumber = 1;
+    [SerializeField] private Enemy enemyCubePrefab = null;
+    [SerializeField] private int cubesNumber = 0;
+    [SerializeField] private Enemy smallEnemyCubePrefab = null;
+    [SerializeField] private int smallCubesNumber = 0;
+
     [SerializeField] private float respawnTime = 1f;
 
     void Start()
@@ -16,10 +19,16 @@ public class Respawn : MonoBehaviour
     private IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(respawnTime);
-        if(enemiesNumber > 0)
+        if(smallCubesNumber > 0)
+        {
+            Instantiate(smallEnemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+            smallCubesNumber--;
+            StartCoroutine(SpawnEnemy());
+        }
+        else if (cubesNumber > 0)
         {
             Instantiate(enemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
-            enemiesNumber--;
+            cubesNumber--;
             StartCoroutine(SpawnEnemy());
         }
     }

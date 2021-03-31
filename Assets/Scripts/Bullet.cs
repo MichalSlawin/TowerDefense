@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private int damage = 1;
-    private float speed = 5f;
+    private float speed = 10f;
     private Enemy target;
 
     public int Damage { get => damage; set => damage = value; }
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         GameObject go = other.gameObject;
         if(go.CompareTag("Enemy"))
         {
-            go.GetComponent<Enemy>().Health--;
+            go.GetComponent<Enemy>().Health -= Damage;
             Destroy(gameObject);
         }
     }
@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
             {
                 oldestEnemy = enemy;
             }
-            else if (enemy.GetInstanceID() < oldestEnemy.GetInstanceID())
+            else if (enemy.Number < oldestEnemy.Number)
             {
                 oldestEnemy = enemy;
             }

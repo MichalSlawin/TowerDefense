@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab = null;
     [SerializeField] private float shootingSpeed = 1;
+    [SerializeField] private int bulletDamage = 1;
 
     private bool bulletShot = false;
 
@@ -20,7 +21,8 @@ public class Turret : MonoBehaviour
     private IEnumerator ShootBullet()
     {
         bulletShot = true;
-        Instantiate(bulletPrefab, transform.position,Quaternion.identity);
+        Bullet bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);
+        bullet.Damage = bulletDamage;
         yield return new WaitForSeconds(shootingSpeed);
         bulletShot = false;
     }
