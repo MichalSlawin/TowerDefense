@@ -8,16 +8,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 10f;
     private Enemy target;
 
-    void Start()
-    {
-        target = GetOldestEnemy();
-    }
+    public Enemy Target { get => target; set => target = value; }
 
     void Update()
     {
-        if(target != null)
+        if(Target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, speed * Time.deltaTime);
         }
         else
         {
@@ -33,25 +30,5 @@ public class Bullet : MonoBehaviour
             go.GetComponent<Enemy>().Health -= damage;
             Destroy(gameObject);
         }
-    }
-
-    private Enemy GetOldestEnemy()
-    {
-        Enemy oldestEnemy = null;
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-
-        foreach(Enemy enemy in enemies)
-        {
-            if (oldestEnemy == null)
-            {
-                oldestEnemy = enemy;
-            }
-            else if (enemy.Number < oldestEnemy.Number)
-            {
-                oldestEnemy = enemy;
-            }
-        }
-
-        return oldestEnemy;
     }
 }
