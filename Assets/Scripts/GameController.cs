@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     private BuildingController buildingController;
     private int turn = 0;
     private Respawn respawn;
+    private int money = 25;
     
     public static Vector3 Finish { get => finish; set => finish = value; }
     public static int PlayerHealth
@@ -24,6 +25,16 @@ public class GameController : MonoBehaviour
         {
             playerHealth = value;
             hpText.text = playerHealth.ToString();
+        }
+    }
+
+    public int Money
+    {
+        get => money;
+        set
+        {
+            money = value;
+            uIController.SetMoneyText(value);
         }
     }
 
@@ -38,6 +49,8 @@ public class GameController : MonoBehaviour
         buildingController = FindObjectOfType<BuildingController>();
         uIController = FindObjectOfType<UIController>();
         startButton = GameObject.Find("StartButton");
+
+        uIController.SetMoneyText(money);
     }
 
     private void Update()

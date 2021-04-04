@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private int number;
 
-    
+    [SerializeField] private int reward = 5;
     [SerializeField] private int health = 1;
 
     public int Health { get => health; set => health = value; }
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            gameController.Money += reward;
         }
     }
 }

@@ -7,8 +7,11 @@ public class Turret : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab = null;
     [SerializeField] private float shootingSpeed = 1f;
     [SerializeField] private float shootingDistance = 10f;
+    [SerializeField] private int cost = 25;
 
     private bool bulletShot = false;
+
+    public int Cost { get => cost; }
 
     void Update()
     {
