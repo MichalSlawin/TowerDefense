@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     private static Vector3 finish;
     private static int playerHealth = 10;
     private static TextMeshProUGUI hpText;
+    private GameObject startButton;
     private UIController uIController;
     private BuildingController buildingController;
     private int turn = 0;
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
 
         buildingController = FindObjectOfType<BuildingController>();
         uIController = FindObjectOfType<UIController>();
+        startButton = GameObject.Find("StartButton");
     }
 
     private void Update()
@@ -68,6 +70,14 @@ public class GameController : MonoBehaviour
         respawn.CubesNumber = Respawn.BaseCubesNumber * turn;
         respawn.SmallCubesNumber = Respawn.BaseSmallCubesNumber * turn;
 
+        if (turn > 3) respawn.RespawnTime = 0.5f;
+        else if (turn > 7) respawn.RespawnTime = 0.25f;
+
         respawn.StartTurn();
+    }
+
+    public void NextTurn()
+    {
+        startButton.SetActive(true);
     }
 }

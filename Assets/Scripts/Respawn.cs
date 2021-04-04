@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
+    private const int BASE_CUBES_NUMBER = 2;
+    private const int BASE_SMALL_CUBES_NUMBER = 1;
+
     [SerializeField] private Enemy enemyCubePrefab = null;
     private int cubesNumber = 2;
     [SerializeField] private Enemy smallEnemyCubePrefab = null;
     private int smallCubesNumber = 1;
-    private const int baseCubesNumber = 2;
-    private const int baseSmallCubesNumber = 1;
-
+    private GameController gameController;
     private float respawnTime = 1f;
 
     public int CubesNumber { get => cubesNumber; set => cubesNumber = value; }
     public int SmallCubesNumber { get => smallCubesNumber; set => smallCubesNumber = value; }
     public float RespawnTime { get => respawnTime; set => respawnTime = value; }
 
-    public static int BaseCubesNumber => baseCubesNumber;
-    public static int BaseSmallCubesNumber => baseSmallCubesNumber;
+    public static int BaseCubesNumber => BASE_CUBES_NUMBER;
+    public static int BaseSmallCubesNumber => BASE_SMALL_CUBES_NUMBER;
+
+    private void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
 
     public void StartTurn()
     {
@@ -39,6 +45,10 @@ public class Respawn : MonoBehaviour
             Instantiate(enemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
             CubesNumber--;
             StartCoroutine(SpawnEnemy());
+        }
+        else
+        {
+            gameController.NextTurn();
         }
     }
 }
