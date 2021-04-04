@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    private static Vector3 respawn;
     private static Vector3 finish;
     private static int playerHealth = 10;
     private static TextMeshProUGUI hpText;
     private UIController uIController;
     private BuildingController buildingController;
-
-    public static Vector3 Respawn { get => respawn; set => respawn = value; }
+    private int turn = 0;
+    private Respawn respawn;
+    
     public static Vector3 Finish { get => finish; set => finish = value; }
     public static int PlayerHealth
     {
@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        respawn = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Transform>().position;
+        respawn = FindObjectOfType<Respawn>();
         finish = GameObject.FindGameObjectWithTag("Finish").GetComponent<Transform>().position;
 
         hpText = GameObject.Find("HPText").GetComponent<TextMeshProUGUI>();
@@ -60,5 +60,14 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartTurn()
+    {
+        turn++;
+        respawn.CubesNumber = Respawn.BaseCubesNumber * turn;
+        respawn.SmallCubesNumber = Respawn.BaseSmallCubesNumber * turn;
+
+        respawn.StartTurn();
     }
 }
