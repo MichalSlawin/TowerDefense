@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GameController : MonoBehaviour
     private static Vector3 finish;
     private static int playerHealth = 10;
     private static TextMeshProUGUI hpText;
-
+    private UIController uIController;
     private BuildingController buildingController;
 
     public static Vector3 Respawn { get => respawn; set => respawn = value; }
@@ -34,6 +35,7 @@ public class GameController : MonoBehaviour
         hpText.text = playerHealth.ToString();
 
         buildingController = FindObjectOfType<BuildingController>();
+        uIController = FindObjectOfType<UIController>();
     }
 
     private void Update()
@@ -51,10 +53,10 @@ public class GameController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 GameObject selectedObject = hit.transform.gameObject;
-                if (selectedObject.CompareTag("BuildArea"))
+                if (selectedObject.CompareTag("BuildArea") && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    BuildArea buildArea = selectedObject.GetComponent<BuildArea>();
-                    buildingController.PlaceTurret(buildArea);
+                    buildingController.BuildArea = selectedObject.GetComponent<BuildArea>();
+                    uIController.ToggleBuildingsMenu();
                 }
             }
         }
