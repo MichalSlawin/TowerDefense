@@ -13,6 +13,10 @@ public class Respawn : MonoBehaviour
     private int smallCubesNumber = 1;
     private GameController gameController;
     private float respawnTime = 1f;
+    [SerializeField] private Enemy bigEnemyCubePrefab = null;
+    private int bigCubesNumber = 0;
+    [SerializeField] private Enemy bossEnemyCubePrefab = null;
+    private int bossCubesNumber = 0;
 
     public int CubesNumber { get => cubesNumber; set => cubesNumber = value; }
     public int SmallCubesNumber { get => smallCubesNumber; set => smallCubesNumber = value; }
@@ -20,6 +24,9 @@ public class Respawn : MonoBehaviour
 
     public static int BaseCubesNumber => BASE_CUBES_NUMBER;
     public static int BaseSmallCubesNumber => BASE_SMALL_CUBES_NUMBER;
+
+    public int BigCubesNumber { get => bigCubesNumber; set => bigCubesNumber = value; }
+    public int BossCubesNumber { get => bossCubesNumber; set => bossCubesNumber = value; }
 
     private void Start()
     {
@@ -44,6 +51,18 @@ public class Respawn : MonoBehaviour
         {
             Instantiate(enemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
             CubesNumber--;
+            StartCoroutine(SpawnEnemy());
+        }
+        else if (BigCubesNumber > 0)
+        {
+            Instantiate(bigEnemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+            BigCubesNumber--;
+            StartCoroutine(SpawnEnemy());
+        }
+        else if (BossCubesNumber > 0)
+        {
+            Instantiate(bossEnemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+            BossCubesNumber--;
             StartCoroutine(SpawnEnemy());
         }
         else

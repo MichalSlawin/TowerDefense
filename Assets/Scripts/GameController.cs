@@ -92,9 +92,16 @@ public class GameController : MonoBehaviour
         respawn.CubesNumber = Respawn.BaseCubesNumber * turn;
         respawn.SmallCubesNumber = Respawn.BaseSmallCubesNumber * turn;
 
-        if (turn > 3) respawn.RespawnTime = 0.5f;
-        else if (turn > 7) respawn.RespawnTime = 0.25f;
-
+        if (turn > 3)
+        {
+            respawn.RespawnTime = 0.5f;
+            respawn.BigCubesNumber = turn - 3;
+        }
+        if (turn > 7)
+        {
+            respawn.RespawnTime = 0.25f;
+            respawn.BossCubesNumber = 1;
+        }
         respawn.StartTurn();
     }
 
