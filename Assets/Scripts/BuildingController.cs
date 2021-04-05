@@ -24,7 +24,7 @@ public class BuildingController : MonoBehaviour
         {
             Vector3 pos = new Vector3(BuildArea.transform.position.x, turretCubePrefab.transform.localScale.y, BuildArea.transform.position.z);
 
-            Instantiate(turretPrefab, pos, Quaternion.identity);
+            BuildArea.BuiltTurret = Instantiate(turretPrefab, pos, Quaternion.identity);
             BuildArea.Occupied = true;
 
             gameController.Money -= turretPrefab.Cost;
@@ -39,5 +39,11 @@ public class BuildingController : MonoBehaviour
     public void PlaceBigTurretCube()
     {
         PlaceTurret(bigTurretCubePrefab);
+    }
+
+    public void DestroyTurret()
+    {
+        Destroy(buildArea.BuiltTurret.gameObject);
+        buildArea.Occupied = false;
     }
 }

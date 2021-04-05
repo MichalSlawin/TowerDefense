@@ -70,8 +70,17 @@ public class GameController : MonoBehaviour
                 GameObject selectedObject = hit.transform.gameObject;
                 if (selectedObject.CompareTag("BuildArea") && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    buildingController.BuildArea = selectedObject.GetComponent<BuildArea>();
-                    uIController.ToggleBuildingsMenu();
+                    BuildArea buildArea = selectedObject.GetComponent<BuildArea>();
+                    buildingController.BuildArea = buildArea;
+
+                    if(buildArea.Occupied)
+                    {
+                        uIController.ToggleDestroyMenu();
+                    }
+                    else
+                    {
+                        uIController.ToggleBuildingsMenu();
+                    }
                 }
             }
         }

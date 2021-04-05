@@ -6,6 +6,7 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject buildingsMenu = null;
+    [SerializeField] private GameObject destroyMenu = null;
     private TextMeshProUGUI moneyText;
 
     private void Start()
@@ -21,5 +22,10 @@ public class UIController : MonoBehaviour
     public void ToggleBuildingsMenu()
     {
         buildingsMenu.SetActive(!buildingsMenu.activeSelf);
+    }
+
+    public void ToggleDestroyMenu()
+    {
+        destroyMenu.SetActive(!destroyMenu.activeSelf);
     }
 }
