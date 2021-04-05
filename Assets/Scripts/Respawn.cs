@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    private const int BASE_CUBES_NUMBER = 2;
+    private const int BASE_CUBES_NUMBER = 1;
     private const int BASE_SMALL_CUBES_NUMBER = 1;
 
     [SerializeField] private Enemy enemyCubePrefab = null;

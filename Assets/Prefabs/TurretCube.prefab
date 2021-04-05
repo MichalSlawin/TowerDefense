@@ -94,3 +94,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2756362261432359659, guid: 6260709acce4d8342bad2eab14e580fe,
     type: 3}
+  shootingSpeed: 1
+  shootingDistance: 10
+  cost: 50

@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     private BuildingController buildingController;
     private int turn = 0;
     private Respawn respawn;
-    private int money = 25;
+    private int money = 50;
     
     public static Vector3 Finish { get => finish; set => finish = value; }
     public static int PlayerHealth
@@ -40,6 +40,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         respawn = FindObjectOfType<Respawn>();
         finish = GameObject.FindGameObjectWithTag("Finish").GetComponent<Transform>().position;
 
@@ -100,7 +102,7 @@ public class GameController : MonoBehaviour
         if (turn > 7)
         {
             respawn.RespawnTime = 0.25f;
-            respawn.BossCubesNumber = 1;
+            respawn.BossCubesNumber = turn - 7;
         }
         respawn.StartTurn();
     }
