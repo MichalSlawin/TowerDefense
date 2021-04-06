@@ -102,6 +102,7 @@ public class GameController : MonoBehaviour
         if (turn > 7)
         {
             respawn.RespawnTime = 0.25f;
+            respawn.BigCubesNumber = turn - 7;
             respawn.BossCubesNumber = turn - 7;
         }
         respawn.StartTurn();

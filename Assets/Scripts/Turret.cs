@@ -5,15 +5,15 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab = null;
-    [SerializeField] private float shootingSpeed = 1f;
-    [SerializeField] private float shootingDistance = 10f;
+    [SerializeField] protected float shootingSpeed = 1f;
+    [SerializeField] protected float shootingDistance = 10f;
     [SerializeField] private int cost = 25;
 
-    private bool bulletShot = false;
+    protected bool bulletShot = false;
 
     public int Cost { get => cost; }
 
-    void Update()
+    protected void Update()
     {
         Enemy target = GetEnemyInDistance();
 
@@ -23,7 +23,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootBullet(Enemy target)
+    protected virtual IEnumerator ShootBullet(Enemy target)
     {
         bulletShot = true;
         Bullet bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);

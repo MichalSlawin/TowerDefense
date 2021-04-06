@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    private float originalAcceleration;
+    private float originalAngularSpeed;
+    private float originalSpeed;
+    private bool speedDivided = false;
+
     private static int numCounter = 1;
 
     private GameController gameController;
@@ -16,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     public int Health { get => health; set => health = value; }
     public int Number { get => number; set => number = value; }
+    public bool SpeedDivided { get => speedDivided; set => speedDivided = value; }
 
     void Start()
     {
@@ -26,6 +32,32 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         agent.destination = GameController.Finish;
+
+        originalAcceleration = agent.acceleration;
+        originalAngularSpeed = agent.angularSpeed;
+        originalSpeed = agent.speed;
+    }
+
+    public IEnumerator DivideSpeed(float divider)
+    {
+        agent.acceleration = originalAcceleration / divider;
+        agent.angularSpeed = originalAngularSpeed / divider;
+        agent.speed = originalSpeed / divider;
+
+        SpeedDivided = true;
+
+        yield return new WaitForSeconds(1);
+
+        if(agent != null) RestoreSpeed();
+    }
+
+    public void RestoreSpeed()
+    {
+        agent.acceleration = originalAcceleration;
+        agent.angularSpeed = originalAngularSpeed;
+        agent.speed = originalSpeed;
+
+        SpeedDivided = false;
     }
 
     private void Update()
