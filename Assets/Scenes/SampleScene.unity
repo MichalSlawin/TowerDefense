@@ -3024,6 +3024,11 @@ PrefabInstance:
       propertyPath: smallCubesNumber
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11552925, guid: bbcef88bc96e35a4790d1f14e9ee56f8, type: 3}
+      propertyPath: smallBossEnemyCubePrefab
+      value: 
+      objectReference: {fileID: 8056472518891096868, guid: 3de7506596fd3274ebd45178b88c6ce2,
+        type: 3}
     - target: {fileID: 2034333765887728076, guid: bbcef88bc96e35a4790d1f14e9ee56f8,
         type: 3}
       propertyPath: m_Name

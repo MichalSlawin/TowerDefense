@@ -91,8 +91,8 @@ public class GameController : MonoBehaviour
     public void StartTurn()
     {
         turn++;
-        respawn.CubesNumber = Respawn.BaseCubesNumber * turn;
-        respawn.SmallCubesNumber = Respawn.BaseSmallCubesNumber * turn;
+        respawn.CubesNumber = turn;
+        respawn.SmallCubesNumber = turn;
 
         if (turn > 3)
         {
@@ -104,6 +104,14 @@ public class GameController : MonoBehaviour
             respawn.RespawnTime = 0.25f;
             respawn.BigCubesNumber = turn - 7;
             respawn.BossCubesNumber = turn - 7;
+        }
+        if (turn > 13)
+        {
+            respawn.CubesNumber = turn - 7;
+            respawn.SmallCubesNumber = turn - 7;
+            respawn.BigCubesNumber = turn - 13;
+            respawn.BossCubesNumber = turn - 13;
+            respawn.SmallBossCubesNumber = turn - 13;
         }
         respawn.StartTurn();
     }
