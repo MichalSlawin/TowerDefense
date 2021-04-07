@@ -7,6 +7,7 @@ public class BuildingController : MonoBehaviour
     [SerializeField] Turret turretCubePrefab = null;
     [SerializeField] Turret bigTurretCubePrefab = null;
     [SerializeField] Turret slowTurretPrefab = null;
+    [SerializeField] Turret multiTurretPrefab = null;
 
     private GameController gameController;
         
@@ -45,6 +46,11 @@ public class BuildingController : MonoBehaviour
     public void PlaceSlowTurret()
     {
         PlaceTurret(slowTurretPrefab);
+    }
+
+    public void PlaceMultiTurret()
+    {
+        PlaceTurret(multiTurretPrefab);
     }
 
     public void DestroyTurret()

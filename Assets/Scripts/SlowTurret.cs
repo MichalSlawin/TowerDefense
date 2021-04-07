@@ -19,10 +19,6 @@ public class SlowTurret : Turret
             {
                 StartCoroutine(enemy.DivideSpeed(2));
             }
-            //else if(enemy.SpeedDivided && Vector3.Distance(transform.position, enemy.transform.position) > shootingDistance)
-            {
-               // enemy.RestoreSpeed();
-            }
         }
     }
 }
