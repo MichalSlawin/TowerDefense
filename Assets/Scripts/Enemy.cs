@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
 
     private static int numCounter = 1;
 
-    private GameController gameController;
-    private NavMeshAgent agent;
+    protected GameController gameController;
+    protected NavMeshAgent agent;
     private int number;
 
     [SerializeField] private int reward = 5;
