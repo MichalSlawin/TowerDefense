@@ -72,16 +72,16 @@ public class Respawn : MonoBehaviour
             BigCubesNumber--;
             StartCoroutine(SpawnEnemy());
         }
-        else if (BossCubesNumber > 0)
-        {
-            Instantiate(bossEnemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
-            BossCubesNumber--;
-            StartCoroutine(SpawnEnemy());
-        }
         else if (SplitEnemyNumber > 0)
         {
             Instantiate(splitEnemyPrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
             SplitEnemyNumber--;
+            StartCoroutine(SpawnEnemy());
+        }
+        else if (BossCubesNumber > 0)
+        {
+            Instantiate(bossEnemyCubePrefab, transform.position, Quaternion.Euler(0f, 180f, 0f));
+            BossCubesNumber--;
             StartCoroutine(SpawnEnemy());
         }
         else

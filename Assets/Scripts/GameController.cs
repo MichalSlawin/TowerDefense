@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    private const int INIT_PLAYER_HP = 10;
+
     private static Vector3 finish;
-    private static int playerHealth = 10;
+    private static int playerHealth;
     private static TextMeshProUGUI hpText;
     private GameObject startButton;
+    private TextMeshProUGUI turnText;
     private UIController uIController;
     private BuildingController buildingController;
     private int turn = 0;
     private Respawn respawn;
     private int money = 50;
+    private bool gameOver = false;
     
     public static Vector3 Finish { get => finish; set => finish = value; }
     public static int PlayerHealth
@@ -42,11 +47,16 @@ public class GameController : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
+        playerHealth = INIT_PLAYER_HP;
+
         respawn = FindObjectOfType<Respawn>();
         finish = GameObject.FindGameObjectWithTag("Finish").GetComponent<Transform>().position;
 
         hpText = GameObject.Find("HPText").GetComponent<TextMeshProUGUI>();
         hpText.text = playerHealth.ToString();
+
+        turnText = GameObject.Find("TurnText").GetComponent<TextMeshProUGUI>();
+        turnText.text = "Turn " + turn;
 
         buildingController = FindObjectOfType<BuildingController>();
         uIController = FindObjectOfType<UIController>();
@@ -58,6 +68,8 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         HandleInput();
+
+        if (PlayerHealth <= 0 && !gameOver) GameOver();
     }
 
     private void HandleInput()
@@ -91,6 +103,8 @@ public class GameController : MonoBehaviour
     public void StartTurn()
     {
         turn++;
+        turnText.text = "Turn " + turn;
+
         respawn.CubesNumber = turn;
         respawn.SmallCubesNumber = turn;
 
@@ -127,6 +141,18 @@ public class GameController : MonoBehaviour
 
     public void NextTurn()
     {
-        startButton.SetActive(true);
+        if(!gameOver) startButton.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
+        startButton.SetActive(false);
+        uIController.ShowLostMenu();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -55,7 +55,10 @@ public class BuildingController : MonoBehaviour
 
     public void DestroyTurret()
     {
-        Destroy(buildArea.BuiltTurret.gameObject);
-        buildArea.Occupied = false;
+        if(buildArea.Occupied)
+        {
+            Destroy(buildArea.BuiltTurret.gameObject);
+            buildArea.Occupied = false;
+        }
     }
 }

@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject buildingsMenu = null;
     [SerializeField] private GameObject destroyMenu = null;
+    [SerializeField] private GameObject loseMenu = null;
     private TextMeshProUGUI moneyText;
 
     private void Start()
@@ -27,5 +28,10 @@ public class UIController : MonoBehaviour
     public void ToggleDestroyMenu()
     {
         destroyMenu.SetActive(!destroyMenu.activeSelf);
+    }
+
+    public void ShowLostMenu()
+    {
+        loseMenu.SetActive(true);
     }
 }
