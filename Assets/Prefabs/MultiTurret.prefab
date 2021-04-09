@@ -95,4 +95,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   shootingSpeed: 1
   shootingDistance: 10
-  cost: 500
+  cost: 400
