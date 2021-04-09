@@ -136,6 +136,16 @@ public class GameController : MonoBehaviour
             respawn.SmallBossCubesNumber = turn - 17;
             respawn.SplitEnemyNumber = turn - 17;
         }
+        if(turn > 23)
+        {
+            respawn.CubesNumber = turn - 17;
+            respawn.SmallCubesNumber = turn - 17;
+            respawn.BigCubesNumber = turn - 23;
+            respawn.BossCubesNumber = turn - 23;
+            respawn.SmallBossCubesNumber = turn - 23;
+            respawn.SplitEnemyNumber = turn - 23;
+            respawn.BigSplitEnemyNumber = turn - 23;
+        }
         respawn.StartTurn();
     }
 
